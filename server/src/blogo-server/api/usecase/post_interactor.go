@@ -1,6 +1,8 @@
 package usecase
 
-import "blogo-server/api/domain"
+import (
+	"blogo-server/api/domain"
+)
 
 // PostInteractor - post struct
 type PostInteractor struct {
@@ -8,13 +10,13 @@ type PostInteractor struct {
 }
 
 // Posts - find all users
-func (interactor *PostInteractor) Posts() (Post domain.Posts, err error) {
-	Post, err = interactor.PostRepository.FindAll()
+func (interactor *PostInteractor) Posts() (posts domain.Posts, err error) {
+	posts, err = interactor.PostRepository.FindAll()
 	return
 }
 
 // PostByID - find post
-func (interactor *PostInteractor) PostByID(identifier int) (Post domain.Post, err error) {
-	Post, err = interactor.PostRepository.FindById(identifier)
+func (interactor *PostInteractor) PostByID(identifier int) (post domain.Post, err error) {
+	post, err = interactor.PostRepository.FindByID(identifier)
 	return
 }

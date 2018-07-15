@@ -1,6 +1,8 @@
 package database
 
-import "blogo-server/api/domain"
+import (
+	"blogo-server/api/domain"
+)
 
 // PostRepository - sql handler
 type PostRepository struct {

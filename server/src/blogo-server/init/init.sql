@@ -1,4 +1,5 @@
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS authors;
+DROP TABLE IF EXISTS posts;
 
 CREATE TABLE authors (
   id integer AUTO_INCREMENT,
@@ -9,7 +10,7 @@ CREATE TABLE authors (
   primary key(id)
 );
 
-INSERT INTO users (name, mail, password, github)
+INSERT INTO authors (name, mail, password, github)
 VALUES
   ('po3rin', 'abctail30@gmail.com', '1234567890', 'po3rin');
 
@@ -22,6 +23,6 @@ CREATE TABLE posts (
   primary key(id)
 );
 
-INSERT INTO users (title, context, created_at)
+INSERT INTO posts (title, context, created_at)
 VALUES
   ('test', 'test-content', now());

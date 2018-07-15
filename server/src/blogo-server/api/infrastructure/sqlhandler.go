@@ -32,8 +32,8 @@ func NewSQLHandler() *SQLHandler {
 }
 
 // Execute - exec
-func (handler *SqlHandler) Execute(statement string, args ...interface{}) (database.Result, error) {
-	res := SqlResult{}
+func (handler *SQLHandler) Execute(statement string, args ...interface{}) (database.Result, error) {
+	res := SQLResult{}
 	result, err := handler.Conn.Exec(statement, args...)
 	if err != nil {
 		return res, err
@@ -43,12 +43,12 @@ func (handler *SqlHandler) Execute(statement string, args ...interface{}) (datab
 }
 
 // Query - query
-func (handler *SqlHandler) Query(statement string, args ...interface{}) (database.Row, error) {
+func (handler *SQLHandler) Query(statement string, args ...interface{}) (database.Row, error) {
 	rows, err := handler.Conn.Query(statement, args...)
 	if err != nil {
-		return new(SqlRow), err
+		return new(SQLRow), err
 	}
-	row := new(SqlRow)
+	row := new(SQLRow)
 	row.Rows = rows
 	return row, nil
 }
@@ -59,12 +59,12 @@ type SQLResult struct {
 }
 
 // LastInsertId - insert id
-func (r SqlResult) LastInsertId() (int64, error) {
+func (r SQLResult) LastInsertId() (int64, error) {
 	return r.Result.LastInsertId()
 }
 
 // RowsAffected - aff
-func (r SqlResult) RowsAffected() (int64, error) {
+func (r SQLResult) RowsAffected() (int64, error) {
 	return r.Result.RowsAffected()
 }
 
@@ -74,16 +74,16 @@ type SQLRow struct {
 }
 
 // Scan - scan
-func (r SqlRow) Scan(dest ...interface{}) error {
+func (r SQLRow) Scan(dest ...interface{}) error {
 	return r.Rows.Scan(dest...)
 }
 
 // Next - next
-func (r SqlRow) Next() bool {
+func (r SQLRow) Next() bool {
 	return r.Rows.Next()
 }
 
 // Close - close
-func (r SqlRow) Close() error {
+func (r SQLRow) Close() error {
 	return r.Rows.Close()
 }

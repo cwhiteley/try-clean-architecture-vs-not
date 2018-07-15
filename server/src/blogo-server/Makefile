@@ -28,7 +28,7 @@ run: ## run go bainary
 
 .PHONY: initdb
 initdb: ## create database and insert first data
-	mysql -p -u root auth_srver < db/init.sql
+	mysql -p -u root blogo < init/init.sql
 
 # Docker =====================================
 

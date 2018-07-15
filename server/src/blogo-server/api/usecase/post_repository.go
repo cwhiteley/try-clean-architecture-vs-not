@@ -4,6 +4,6 @@ import "blogo-server/api/domain"
 
 // PostRepository - post interface
 type PostRepository interface {
-	FindById(int) (domain.Post, error)
 	FindAll() (domain.Posts, error)
+	FindByID(int) (domain.Post, error)
 }
