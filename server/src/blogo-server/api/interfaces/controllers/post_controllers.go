@@ -11,7 +11,7 @@ type PostController struct {
 }
 
 // Index - get all posts
-func (controller *PostController) Index(c Content) {
+func (controller *PostController) Index(c Context) {
 	posts, err := controller.Interactor.Posts()
 	if err != nil {
 		c.JSON(500, NewError(err))
@@ -20,10 +20,10 @@ func (controller *PostController) Index(c Content) {
 	c.JSON(200, posts)
 }
 
-// Show - get post
-func (controller *PostController) Show(c Content) {
+// Show - get post by ID
+func (controller *PostController) Show(c Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
-	post, err := controller.Interactor.PostById(id)
+	post, err := controller.Interactor.PostByID(id)
 	if err != nil {
 		c.JSON(500, NewError(err))
 		return

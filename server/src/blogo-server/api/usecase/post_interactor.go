@@ -7,8 +7,8 @@ type PostInteractor struct {
 	PostRepository PostRepository
 }
 
-// Users - find all users
-func (interactor *PostInteractor) Users() (Post domain.Posts, err error) {
+// Posts - find all users
+func (interactor *PostInteractor) Posts() (Post domain.Posts, err error) {
 	Post, err = interactor.PostRepository.FindAll()
 	return
 }
