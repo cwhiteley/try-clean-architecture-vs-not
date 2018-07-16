@@ -17,6 +17,7 @@ func init() {
 	router.POST("/api/v1/posts", func(c *gin.Context) { postController.Create(c) })
 	router.GET("/api/v1/posts", func(c *gin.Context) { postController.Index(c) })
 	router.GET("/api/v1/posts/:id", func(c *gin.Context) { postController.Show(c) })
+	router.DELETE("/api/v1/posts/:id", func(c *gin.Context) { postController.Delete(c) })
 
 	Router = router
 }

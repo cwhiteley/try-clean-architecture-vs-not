@@ -11,7 +11,7 @@ type PostInteractor struct {
 
 // Add - find all users
 func (interactor *PostInteractor) Add(p domain.Post) (post domain.Post, err error) {
-	identifier, err := interactor.PostRepository.Store(p)
+	identifier, err := interactor.PostRepository.StorePost(p)
 	if err != nil {
 		return
 	}
@@ -28,5 +28,11 @@ func (interactor *PostInteractor) Posts() (posts domain.Posts, err error) {
 // PostByID - find post
 func (interactor *PostInteractor) PostByID(identifier int) (post domain.Post, err error) {
 	post, err = interactor.PostRepository.FindByID(identifier)
+	return
+}
+
+// Remove - remove post
+func (interactor *PostInteractor) Remove(id int) (err error) {
+	err = interactor.PostRepository.DeletePost(id)
 	return
 }

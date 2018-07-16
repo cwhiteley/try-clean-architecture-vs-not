@@ -2,6 +2,7 @@ package database
 
 import (
 	"blogo-server/api/domain"
+	"fmt"
 	"time"
 )
 
@@ -10,8 +11,8 @@ type PostRepository struct {
 	SQLHandler
 }
 
-//Store - insert post
-func (repo *PostRepository) Store(p domain.Post) (id int, err error) {
+//StorePost - insert post
+func (repo *PostRepository) StorePost(p domain.Post) (id int, err error) {
 	result, err := repo.Execute(
 		"INSERT INTO posts (title, content, created_at) VALUES (?,?,?)", p.Title, p.Content, time.Now(),
 	)
@@ -67,5 +68,12 @@ func (repo *PostRepository) FindByID(identifier int) (post domain.Post, err erro
 	post.ID = id
 	post.Title = title
 	post.Content = content
+	return
+}
+
+// DeletePost - remove post
+func (repo *PostRepository) DeletePost(identifier int) (err error) {
+	result, err := repo.Execute("DELETE FROM posts WHERE id = ?", identifier)
+	fmt.Println(result)
 	return
 }

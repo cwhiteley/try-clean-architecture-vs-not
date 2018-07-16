@@ -23,7 +23,7 @@ func NewPostController(SQLHandler database.SQLHandler) *PostController {
 	}
 }
 
-// Create - create new post
+// Create - create new post controller
 func (controller *PostController) Create(c Context) {
 	p := domain.Post{}
 	c.Bind(&p)
@@ -35,7 +35,7 @@ func (controller *PostController) Create(c Context) {
 	c.JSON(201, post)
 }
 
-// Index - get all posts
+// Index - get all controller
 func (controller *PostController) Index(c Context) {
 	posts, err := controller.Interactor.Posts()
 	if err != nil {
@@ -45,7 +45,7 @@ func (controller *PostController) Index(c Context) {
 	c.JSON(200, posts)
 }
 
-// Show - get post by ID
+// Show - get post controller by ID
 func (controller *PostController) Show(c Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	post, err := controller.Interactor.PostByID(id)
@@ -54,4 +54,15 @@ func (controller *PostController) Show(c Context) {
 		return
 	}
 	c.JSON(200, post)
+}
+
+// Delete - delete controller post
+func (controller *PostController) Delete(c Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	err := controller.Interactor.Remove(id)
+	if err != nil {
+		c.JSON(500, NewError(err))
+		return
+	}
+	c.JSON(204, nil)
 }
