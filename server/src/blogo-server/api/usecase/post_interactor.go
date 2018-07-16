@@ -9,6 +9,16 @@ type PostInteractor struct {
 	PostRepository PostRepository
 }
 
+// Add - find all users
+func (interactor *PostInteractor) Add(p domain.Post) (post domain.Post, err error) {
+	identifier, err := interactor.PostRepository.Store(p)
+	if err != nil {
+		return
+	}
+	post, err = interactor.PostRepository.FindByID(identifier)
+	return
+}
+
 // Posts - find all users
 func (interactor *PostInteractor) Posts() (posts domain.Posts, err error) {
 	posts, err = interactor.PostRepository.FindAll()

@@ -23,6 +23,9 @@ clean: ## remove go bainary
 run: ## run go bainary
 	$(GOBUILD) -o $(BINARY_NAME) -v ./...
 	./$(BINARY_NAME)
+.PHONY: doc
+doc: ## exec godoc localhost:6060
+	godoc -http=:6060
 
 # MySQL ======================================
 

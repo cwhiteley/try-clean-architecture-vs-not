@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"blogo-server/api/domain"
 	"blogo-server/api/interfaces/database"
 	"blogo-server/api/usecase"
 	"strconv"
@@ -20,6 +21,18 @@ func NewPostController(SQLHandler database.SQLHandler) *PostController {
 			},
 		},
 	}
+}
+
+// Create - create new post
+func (controller *PostController) Create(c Context) {
+	p := domain.Post{}
+	c.Bind(&p)
+	post, err := controller.Interactor.Add(p)
+	if err != nil {
+		c.JSON(500, NewError(err))
+		return
+	}
+	c.JSON(201, post)
 }
 
 // Index - get all posts

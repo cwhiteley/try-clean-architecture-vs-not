@@ -2,12 +2,28 @@ package database
 
 import (
 	"blogo-server/api/domain"
-	"fmt"
+	"time"
 )
 
 // PostRepository - sql handler
 type PostRepository struct {
 	SQLHandler
+}
+
+//Store - insert post
+func (repo *PostRepository) Store(p domain.Post) (id int, err error) {
+	result, err := repo.Execute(
+		"INSERT INTO posts (title, content, created_at) VALUES (?,?,?)", p.Title, p.Content, time.Now(),
+	)
+	if err != nil {
+		return
+	}
+	id64, err := result.LastInsertId()
+	if err != nil {
+		return
+	}
+	id = int(id64)
+	return
 }
 
 // FindAll - select all
@@ -46,7 +62,6 @@ func (repo *PostRepository) FindByID(identifier int) (post domain.Post, err erro
 	var content string
 	row.Next()
 	if err = row.Scan(&id, &title, &content); err != nil {
-		fmt.Println(err)
 		return
 	}
 	post.ID = id
