@@ -17,12 +17,12 @@ VALUES
 CREATE TABLE posts (
   id integer AUTO_INCREMENT,
   title varchar(255),
-  context varchar(255),
+  content varchar(255),
   created_at datetime,
   updated_at datetime,
   primary key(id)
 );
 
-INSERT INTO posts (title, context, created_at)
+INSERT INTO posts (title, content, created_at)
 VALUES
   ('test', 'test-content', now());

@@ -13,8 +13,9 @@ func init() {
 	router := gin.Default()
 
 	postController := controllers.NewPostController(NewSQLHandler())
-	router.GET("/posts", func(c *gin.Context) { postController.Index(c) })
-	router.GET("/posts/:id", func(c *gin.Context) { postController.Show(c) })
+
+	router.GET("/api/v1/posts", func(c *gin.Context) { postController.Index(c) })
+	router.GET("/api/v1/posts/:id", func(c *gin.Context) { postController.Show(c) })
 
 	Router = router
 }
