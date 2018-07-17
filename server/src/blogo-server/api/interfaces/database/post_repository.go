@@ -2,7 +2,6 @@ package database
 
 import (
 	"blogo-server/api/domain"
-	"fmt"
 	"time"
 )
 
@@ -73,7 +72,6 @@ func (repo *PostRepository) FindByID(identifier int) (post domain.Post, err erro
 
 // DeletePost - remove post
 func (repo *PostRepository) DeletePost(identifier int) (err error) {
-	result, err := repo.Execute("DELETE FROM posts WHERE id = ?", identifier)
-	fmt.Println(result)
+	_, err = repo.Execute("DELETE FROM posts WHERE id = ?", identifier)
 	return
 }

@@ -6,4 +6,5 @@ type Context interface {
 	Bind(interface{}) error
 	Status(int)
 	JSON(int, interface{})
+	Redirect(int, string)
 }
