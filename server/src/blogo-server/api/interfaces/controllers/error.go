@@ -17,5 +17,6 @@ func (e *Error) Error() string {
 func NewError(err error) *Error {
 	return &Error{
 		Message: err.Error(),
+		Code:    500,
 	}
 }

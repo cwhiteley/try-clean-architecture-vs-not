@@ -16,10 +16,12 @@ func (repo *PostRepository) StorePost(p domain.Post) (id int, err error) {
 		"INSERT INTO posts (title, content, created_at) VALUES (?,?,?)", p.Title, p.Content, time.Now(),
 	)
 	if err != nil {
+		print("ww")
 		return
 	}
 	id64, err := result.LastInsertId()
 	if err != nil {
+		print("ww")
 		return
 	}
 	id = int(id64)
@@ -31,6 +33,7 @@ func (repo *PostRepository) FindAll() (posts domain.Posts, err error) {
 	rows, err := repo.Query("SELECT id, title, content FROM posts")
 	defer rows.Close()
 	if err != nil {
+		print("ww")
 		return
 	}
 	for rows.Next() {
@@ -55,6 +58,7 @@ func (repo *PostRepository) FindByID(identifier int) (post domain.Post, err erro
 	row, err := repo.Query("SELECT id, title, content FROM posts WHERE id = ?", identifier)
 	defer row.Close()
 	if err != nil {
+		print("ww2")
 		return
 	}
 	var id int64
@@ -62,6 +66,7 @@ func (repo *PostRepository) FindByID(identifier int) (post domain.Post, err erro
 	var content string
 	row.Next()
 	if err = row.Scan(&id, &title, &content); err != nil {
+		print("ww3")
 		return
 	}
 	post.ID = id
@@ -73,5 +78,8 @@ func (repo *PostRepository) FindByID(identifier int) (post domain.Post, err erro
 // DeletePost - remove post
 func (repo *PostRepository) DeletePost(identifier int) (err error) {
 	_, err = repo.Execute("DELETE FROM posts WHERE id = ?", identifier)
+	if err != nil {
+		print("ww")
+	}
 	return
 }
