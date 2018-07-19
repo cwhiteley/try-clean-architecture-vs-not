@@ -1,10 +1,10 @@
-# BloGo
+# try-clean-architecture-vs-not
 
 in development ...
 
 ## Description
 
-This is Simple CMS developed by using golang
+try clean architecture and not clean architecture. 
 
 ## Quick Start
 
